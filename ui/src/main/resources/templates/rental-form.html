@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nouvelle Location</title>
+</head>
+<body>
+    <h1>Nouvelle Location</h1>
+    <form th:action="@{/rentals/create}" th:object="${rental}" method="post">
+        <label>Date Début: <input type="date" th:field="*{dateDebut}" /></label><br>
+        <label>Date Retour: <input type="date" th:field="*{dateRetour}" /></label><br>
+        <label>ID Client: <input type="number" th:field="*{clientId}" /></label><br>
+        <label>ID Véhicule: <input type="number" th:field="*{vehicleId}" /></label><br>
+        <button type="submit">Confirmer</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer une Nouvelle Location</title>
+</head>
+<body>
+    <h1>Créer une Nouvelle Location</h1>
+    <form th:action="@{/locations}" th:object="${location}" method="post">
+        <div>
+            <label for="clientId">ID Client :</label>
+            <input type="number" id="clientId" name="clientId" th:field="*{clientId}" placeholder="Entrez l'ID du client" required />
+        </div>
+        <div>
+            <label for="vehiculeId">ID Véhicule :</label>
+            <input type="number" id="vehiculeId" name="vehiculeId" th:field="*{vehiculeId}" placeholder="Entrez l'ID du véhicule" required />
+        </div>
+        <div>
+            <label for="dateDebut">Date de Début :</label>
+            <input type="date" id="dateDebut" name="dateDebut" th:field="*{dateDebut}" required />
+        </div>
+        <div>
+            <label for="dateFin">Date de Fin :</label>
+            <input type="date" id="dateFin" name="dateFin" th:field="*{dateFin}" required />
+        </div>
+        <div>
+            <label for="prixTotal">Prix Total :</label>
+            <input type="number" step="0.01" id="prixTotal" name="prixTotal" th:field="*{prixTotal}" placeholder="Entrez le prix total" required />
+        </div>
+        <button type="submit">Créer la Location</button>
+    </form>
+</body>
+</html>
