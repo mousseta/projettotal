@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
-import com.parkauto.gateway.ui.dto.ClientDTO;
+import com.parkauto.ui.dto.ClientDTO;
 
 @Controller
 public class ClientController {
