@@ -7,6 +7,8 @@ import com.parkauto.ui.dto.VehiculeDTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ import java.util.stream.Collectors; // Pour Collectors.toList()
 
 @Controller
 public class LocationController {
+
+    private static final Logger logger = LoggerFactory.getLogger(LocationController.class);
+
 
     @Autowired
     private RestTemplate restTemplate;
@@ -52,29 +57,33 @@ public class LocationController {
     }
 
     @GetMapping("/location-form")
-public String showLocationForm(Model model) {
-    // Récupérer les clients depuis l'API Gateway
-    String clientsUrl = "http://localhost:8080/api/clients";
-    ClientDTO[] clients = restTemplate.getForObject(clientsUrl, ClientDTO[].class);
-
-    // Récupérer les véhicules depuis l'API Gateway
-   String vehiculesUrl = "http://localhost:8080/api/vehicules/list";
-VehiculeDTO[] vehicules = restTemplate.getForObject(vehiculesUrl, VehiculeDTO[].class);
-
-    // // Extraire les noms des images des véhicules
-    // List<String> imageNames = Arrays.stream(vehicules)
-    //                                 .map(VehiculeDTO::getImageVehicule) // Supposons que getImageName() est le getter pour le nom de l'image
-    //                                 .collect(Collectors.toList());
-
-    // Ajouter les noms des images au modèle
-    model.addAttribute("vehicules", vehicules);
-
-    // Ajouter les données au modèle
-    model.addAttribute("clients", clients);
-    model.addAttribute("location", new LocationDTO());
-
-    return "location-form"; // Vue Thymeleaf
-}
+    public String showLocationForm(Model model) {
+        // Récupérer les clients depuis l'API Gateway
+        String clientsUrl = "http://localhost:8080/api/clients";
+        ClientDTO[] clients = restTemplate.getForObject(clientsUrl, ClientDTO[].class);
+    
+        // Récupérer les véhicules depuis l'API Gateway
+        String vehiculesUrl = "http://localhost:8080/api/vehicules/list";
+        VehiculeDTO[] vehicules = restTemplate.getForObject(vehiculesUrl, VehiculeDTO[].class);
+    
+        // Loggez le contenu des véhicules
+        if (vehicules != null) {
+            logger.info("Contenu des véhicules récupérés depuis l'API Gateway :");
+            for (VehiculeDTO vehicule : vehicules) {
+                logger.info(vehicule.toString());
+            }
+        } else {
+            logger.warn("Aucun véhicule récupéré depuis l'API Gateway.");
+        }
+    
+        // Ajouter les véhicules et les clients au modèle
+        model.addAttribute("vehicules", vehicules);
+        model.addAttribute("clients", clients);
+        model.addAttribute("location", new LocationDTO());
+    
+        return "location-form"; // Vue Thymeleaf
+    }
+    
 
 
 

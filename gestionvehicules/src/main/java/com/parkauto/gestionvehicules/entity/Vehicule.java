@@ -50,11 +50,11 @@ public class Vehicule {
 	}
 
 
-	public Long getMatricule() {
+	public Long getIdvehicule() {
 		return idvehicule;
 	}
 
-	public void setMatricule(Long idvehicule) {
+	public void setIdvehicule(Long idvehicule) {
 		this.idvehicule = idvehicule;
 	}
 

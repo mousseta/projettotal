@@ -28,7 +28,7 @@
                     <option value="" disabled selected>Sélectionnez un véhicule</option>
                     <option th:each="vehicule : ${vehicules}" 
                             th:value="${vehicule.idvehicule}" 
-                            th:text="${vehicule.anneeModel + ' - ' + vehicule.prix + ' €'}"></option>
+                            th:text="${vehicule.idvehicule + ' - ' + vehicule.imageVehicule + ' €'}"></option>
                 </select>
             </div>
 
